@@ -20,11 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());  // To parse cookies from the request
 const PORT = process.env.PORT || 3000;
-// Connect to the MongoDB database
-mongoose.connect('mongodb://localhost:27017/e-commerce', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+console.log("Database connection string:", process.env.connection);
+mongoose.connect(process.env.connection);
+
 const db = mongoose.connection;
 db.on('error', () => console.log("Error in Connecting to Database"));
 db.once('open', () => console.log("Connected to Database"));
@@ -454,4 +452,3 @@ app.post('/stripe-checkout', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running at port ${PORT}`);
 });
-

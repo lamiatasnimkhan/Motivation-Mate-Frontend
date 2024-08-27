@@ -125,9 +125,10 @@
 
     <script src="cart.js"></script>
     <script>
+        const BASE_URL = 'https://kick-kart-tan.vercel.app';
         async function fetchProductsn() {
             try {
-                const response = await fetch('/api/productsn'); // Ensure the URL is correct
+                const response = await fetch(`${BASE_URL}/api/productsn`); // Ensure the URL is correct
 
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

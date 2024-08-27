@@ -127,6 +127,7 @@
 
     <!-- Add to Cart Function -->
     <script>
+        const BASE_URL = 'https://kick-kart-tan.vercel.app';
        // Example for adding an item to the cart
 async function addToCart(product) {
     try {
@@ -144,7 +145,7 @@ async function addToCart(product) {
             quantity: 1 // Set the quantity accordingly
         };
 
-        const response = await fetch('/api/cart', {
+        const response = await fetch(`${BASE_URL}/api/cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -172,7 +173,7 @@ function getCookie(name) {
 
 async function fetchProducts() {
     try {
-        const response = await fetch('/api/products');
+        const response = await fetch(`${BASE_URL}/api/products`);
 
         if (!response.ok) {
             throw new Error('Network response was not ok');

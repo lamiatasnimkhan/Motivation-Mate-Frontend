@@ -1,3 +1,5 @@
+const BASE_URL = 'https://kick-kart-tan.vercel.app';
+
 document.addEventListener("DOMContentLoaded", () => {
     let cartIcon = document.querySelector('#cart-icon');
     let cart = document.querySelector('.cart1');
@@ -68,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cartItems = [{ title, price, productImg, quantity }];
 
         try {
-            const response = await fetch('/api/cart', {
+            const response = await fetch(`${BASE_URL}/api/cart`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({ cartItems })
             });
-
+    
             if (!response.ok) {
                 throw new Error('Failed to save cart items');
             }
-
+    
             console.log('Cart items saved:', await response.json());
         } catch (error) {
             console.error('Error saving cart items:', error);
@@ -96,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTotal(); // Update the total price
     
         // Send DELETE request to remove item from the cart in the database
-        fetch(`/api/cart/${encodeURIComponent(productName)}`, {
+        fetch(`${BASE_URL}/api/cart/${encodeURIComponent(productName)}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -145,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function loadCart() {
-        fetch('/api/cart', {
+        fetch(`${BASE_URL}/api/cart`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -193,43 +195,42 @@ document.addEventListener("DOMContentLoaded", () => {
     
         
             try {
-                const response = await fetch('/api/buy', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({ cartItems })
-                });
-    
-                if (!response.ok) {
-                    throw new Error('Failed to save purchase');
-                }
-    
-                const items = cartItems;
-                const stripeResponse = await fetch('/stripe-checkout', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ items })
-                });
-    
-                if (!stripeResponse.ok) {
-                    throw new Error('Failed to initiate Stripe checkout');
-                }
-    
-                const { url } = await stripeResponse.json();
-                if (url) {
-                    window.location.href = url;
-                    clearCart();
-                } else {
-                    console.error("No URL returned from the server");
-                }
-            } catch (err) {
-                console.error('Error:', err);
-            }
-        
+        const response = await fetch(`${BASE_URL}/api/buy`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify({ cartItems })
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to save purchase');
+        }
+
+        const items = cartItems;
+        const stripeResponse = await fetch('/stripe-checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ items })
+        });
+
+        if (!stripeResponse.ok) {
+            throw new Error('Failed to initiate Stripe checkout');
+        }
+
+        const { url } = await stripeResponse.json();
+        if (url) {
+            window.location.href = url;
+            clearCart();
+        } else {
+            console.error("No URL returned from the server");
+        }
+    } catch (err) {
+        console.error('Error:', err);
+    }
     });
     
     function clearCart() {
