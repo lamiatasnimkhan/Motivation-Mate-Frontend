@@ -171,22 +171,33 @@ function getCookie(name) {
 }
 
 
-async function fetchProducts() {
-    try {
-        const response = await fetch(`${BASE_URL}/api/products`);
+    
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+    async function fetchProducts() {
+        try {
+            const response = await fetch(`${BASE_URL}/api/products`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any required authentication headers here, e.g., Authorization: `Bearer ${token}`
+                }
+            });
 
-        const products = await response.json();
-        const productContainer = document.getElementById('product-container');
+            // Check if the response is not OK
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Server Error:', errorText);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
-        products.forEach(product => {
-            const productBox = document.createElement('div');
-            productBox.classList.add('col-md-3', 'mb-3');
+            const products = await response.json(); // Parse the JSON response
+            const productContainer = document.getElementById('product-container');
 
-            productBox.innerHTML = `
+            products.forEach(product => {
+                const productBox = document.createElement('div');
+                productBox.classList.add('col-md-3', 'mb-3');
+
+                productBox.innerHTML = `
                 <div class="product-box">
                     <img style="height:200px" src="${product.imageUrl}" alt="${product.title}" class="product-img" />
                     <div class="des">
@@ -201,14 +212,13 @@ async function fetchProducts() {
                         </div>
                         <h4 class="price">$${product.price}</h4>
                     </div>
-                    <a class="cart" href="#" data-id="${product._id}"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a class="cart" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                 </div>
-            `;
+                `;
 
-            productContainer.appendChild(productBox);
-        });
-
-        document.querySelectorAll('.cart').forEach(cartButton => {
+                productContainer.appendChild(productBox);
+            });
+            document.querySelectorAll('.cart').forEach(cartButton => {
             cartButton.addEventListener('click', (event) => {
                 event.preventDefault();
                 const itemId = cartButton.getAttribute('data-id');
@@ -219,9 +229,11 @@ async function fetchProducts() {
     } catch (err) {
         console.error("Error fetching products:", err);
     }
-}
+    }
 
-window.onload = fetchProducts;
+    // Call the function to fetch the products on page load
+    window.onload = fetchProducts;
+
 
     </script>
 

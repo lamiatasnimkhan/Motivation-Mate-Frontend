@@ -122,22 +122,32 @@
       </footer>
     <script src="cart.js"></script>
     <script>
-         const BASE_URL = 'https://kick-kart-tan.vercel.app';
+        const BASE_URL = 'https://kick-kart-tan.vercel.app';
+    
         async function fetchProductsf() {
             try {
-                const response = await fetch(`${BASE_URL}/api/productsf`); // Ensure the URL is correct
-
+                const response = await fetch(`${BASE_URL}/api/productsf`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // Add any required authentication headers here, e.g., Authorization: `Bearer ${token}`
+                    }
+                });
+    
+                // Check if the response is not OK
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    const errorText = await response.text();
+                    console.error('Server Error:', errorText);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-
-                const products = await response.json();
+    
+                const products = await response.json(); // Parse the JSON response
                 const productContainer = document.getElementById('product-container');
-
+    
                 products.forEach(product => {
                     const productBox = document.createElement('div');
                     productBox.classList.add('col-md-3', 'mb-3');
-
+    
                     productBox.innerHTML = `
                     <div class="product-box">
                         <img style="height:200px" src="${product.imageUrl}" alt="${product.title}" class="product-img" />
@@ -156,17 +166,17 @@
                         <a class="cart" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                     </div>
                     `;
-
+    
                     productContainer.appendChild(productBox);
                 });
             } catch (err) {
                 console.error("Error fetching products:", err);
             }
         }
-
+    
         // Call the function to fetch the products on page load
         window.onload = fetchProductsf;
-        </script>
+    </script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

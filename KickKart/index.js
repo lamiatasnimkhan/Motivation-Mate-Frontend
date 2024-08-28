@@ -1,12 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import stripe from "stripe";
-import path from "path";
-import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import jwt from 'jsonwebtoken';
-import cookieParser from 'cookie-parser';
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
 dotenv.config();
 
@@ -14,44 +13,23 @@ const app = express();
 const stripeGateway = stripe(process.env.STRIPE_API_KEY);
 
 // Middleware
-app.use(express.static('public'));
+app.use(cors({
+    origin: 'https://kick-kart-front.vercel.app',  // Allow requests from both localhost and your frontend on Vercel
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true,
+}));
+
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());  // To parse cookies from the request
-const PORT = process.env.PORT || 3000;
-console.log("Database connection string:", process.env.connection);
-mongoose.connect(process.env.connection);
+app.use(cookieParser());
 
-const db = mongoose.connection;
-db.on('error', () => console.log("Error in Connecting to Database"));
-db.once('open', () => console.log("Connected to Database"));
+// MongoDB connection
+mongoose.connect(process.env.connection, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log("Connected to Database"))
+  .catch(err => console.error("Error in Connecting to Database:", err));
 
-const productSchema = new mongoose.Schema({
-    title: String,
-    imageUrl: String,
-    price: Number,
-    category: String
-});
-
-const Product = mongoose.model('Product', productSchema);
-
-const productfSchema = new mongoose.Schema({
-    title: String,
-    imageUrl: String,
-    price: Number,
-    category: String
-});
-
-const Productf = mongoose.model('Productf', productfSchema);
-const productnSchema = new mongoose.Schema({
-    title: String,
-    imageUrl: String,
-    price: Number,
-    category: String
-});
-
-const Productn = mongoose.model('Productn', productnSchema);
+// Schemas and Models
 const cartSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -81,6 +59,7 @@ const cartSchema = new mongoose.Schema({
 });
 
 const Cart = mongoose.model('Cart', cartSchema);
+
 const buySchema = new mongoose.Schema({
     username: {
         type: String,
@@ -115,90 +94,9 @@ const buySchema = new mongoose.Schema({
 
 const Buy = mongoose.model('Buy', buySchema);
 
-// Routes
-app.get("/", (req, res) => {
-    res.sendFile("index.html", { root: "public" });
-});
-
-app.get("/men", (req, res) => {
-    res.sendFile("men.html", { root: "public" });
-});
-
-app.get("/women", (req, res) => {
-    res.sendFile("women.html", { root: "public" });
-});
-
-app.get("/new", (req, res) => {
-    res.sendFile("new.html", { root: "public" });
-});
-
-app.get("/payment", (req, res) => {
-    res.sendFile("payment.html", { root: "public" });
-});
-
-app.get("/cancel", (req, res) => {
-    res.sendFile("cancel.html", { root: "public" });
-});
-
-// User Sign-Up Route
-app.post('/sign_up', async (req, res) => {
-    try {
-        const { name, email, username, password } = req.body;
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const data = { name, email, username, password: hashedPassword };
-
-        await db.collection('registers').insertOne(data);
-        console.log("Record Inserted Successfully");
-
-        return res.redirect('index.html');
-    } catch (err) {
-        console.log("Error during sign-up:", err);
-        return res.status(500).json({ error: "Sign-up failed" });
-    }
-});
-
-app.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-
-        const user = await db.collection('registers').findOne({ email });
-        console.log("User found:", user);
-
-        if (user) {
-            if (password === user.password) {
-                console.log("Password matches");
-                const token = jwt.sign(
-                    { id: user._id, name: user.name, email: user.email, username: user.username },
-                    process.env.JWT_SECRET,
-                    { expiresIn: '1h' }
-                );
-                res.cookie('authToken', token, { httpOnly: true });
-                return res.redirect('index.html');
-            } else {
-                console.log("Password doesn't match");
-                return res.status(400).json({ error: "Password doesn't match" });
-            }
-        } else {
-            console.log("User doesn't exist");
-            return res.status(400).json({ error: "User doesn't exist" });
-        }
-    } catch (error) {
-        console.error("Error during login:", error);
-        return res.status(500).json({ error: "Login failed" });
-    }
-});
-
-app.post('/logout', (req, res) => {
-    res.clearCookie('authToken');
-    return res.redirect('index.html');
-});
-
-// Middleware to authenticate token
 // Middleware to authenticate token
 function authenticateToken(req, res, next) {
-    const token = req.cookies.authToken || req.headers['authorization'].split(' ')[1];
+    const token = req.cookies.authToken || (req.headers['authorization'] && req.headers['authorization'].split(' ')[1]);
 
     if (!token) {
         return res.status(401).json({ message: 'Access token is missing or invalid' });
@@ -211,48 +109,10 @@ function authenticateToken(req, res, next) {
     });
 }
 
+// API Routes
 
-app.get('/someProtectedRoute', authenticateToken, (req, res) => {
-    res.json({ message: 'This is a protected route', user: req.user });
-});
-
-app.get('/getUser', authenticateToken, (req, res) => {
-    res.json({ name: req.user.name, email: req.user.email });
-});
-
-// API routes to fetch products
-app.get('/api/products', async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.json(products);
-    } catch (err) {
-        console.error('Error fetching products:', err);
-        res.status(500).json({ error: 'Error fetching products' });
-    }
-});
-
-app.get('/api/productsf', async (req, res) => {
-    try {
-        const productsf = await Productf.find();
-        res.json(productsf);
-    } catch (err) {
-        console.error('Error fetching products:', err);
-        res.status(500).json({ error: 'Error fetching products' });
-    }
-});
-
-app.get('/api/productsn', async (req, res) => {
-    try {
-        const productsn = await Productn.find();
-        res.json(productsn);
-    } catch (err) {
-        console.error('Error fetching products:', err);
-        res.status(500).json({ error: 'Error fetching products' });
-    }
-});
-// GET route to retrieve cart items
+// Fetch Cart Items
 app.get('/api/cart', authenticateToken, async (req, res) => {
-    console.log('GET /api/cart route hit'); // Debug log
     try {
         const username = req.user.name; // or use req.user.email
 
@@ -268,27 +128,10 @@ app.get('/api/cart', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/orders', authenticateToken, async (req, res) => {
-    try {
-        const username = req.user.name; // or req.user.email if you prefer
-        const orders = await Buy.find({ username }); // Find all orders for the authenticated user
-
-        if (!orders || orders.length === 0) {
-            return res.status(404).json({ message: 'No orders found' });
-        }
-
-        res.status(200).json(orders);
-    } catch (error) {
-        console.error('Error fetching orders:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-});
-
-
-// POST route for adding to cart
+// Add Items to Cart
 app.post('/api/cart', authenticateToken, async (req, res) => {
     try {
-        const username = req.user.name; // or use req.user.email if you prefer
+        const username = req.user.name; // or use req.user.email
         if (!username) {
             return res.status(400).json({ message: 'Username is required' });
         }
@@ -333,64 +176,44 @@ app.post('/api/cart', authenticateToken, async (req, res) => {
             await newCart.save();
         }
 
-        res.status(201).json({ message: 'Cart items saved successfully' });
+        res.status(201).json({ message: 'Cart updated successfully' });
     } catch (error) {
-        console.error('Error saving cart items:', error);
+        console.error('Error adding items to cart:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
-// DELETE route to remove item from the cart
+// Remove Item from Cart
 app.delete('/api/cart/:productName', authenticateToken, async (req, res) => {
     try {
-        const username = req.user.name; // or req.user.email if you prefer
+        const username = req.user.name; // or use req.user.email
         const { productName } = req.params;
 
-        if (!username || !productName) {
-            return res.status(400).json({ message: 'Username and productName are required' });
-        }
-
-        // Find the user's cart
         const userCart = await Cart.findOne({ username });
 
-        if (!userCart) {
-            return res.status(404).json({ message: 'Cart not found' });
-        }
+        if (userCart) {
+            userCart.products = userCart.products.filter(product => product.productName !== productName);
 
-        // Remove the item from the cart
-        userCart.products = userCart.products.filter(product => product.productName !== productName);
-
-        if (userCart.products.length === 0) {
-            // Optionally, delete the cart if it's empty
-            await Cart.deleteOne({ username });
-        } else {
             await userCart.save();
-        }
 
-        res.status(200).json({ message: 'Cart item removed successfully' });
+            res.status(200).json({ message: 'Product removed from cart' });
+        } else {
+            res.status(404).json({ message: 'Cart not found' });
+        }
     } catch (error) {
-        console.error('Error removing cart item:', error);
+        console.error('Error removing product from cart:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
-
+// Process Purchase
 app.post('/api/buy', authenticateToken, async (req, res) => {
     try {
-        const username = req.user.name; // or req.user.email if preferred
-        if (!username) {
-            return res.status(400).json({ message: 'Username is required' });
-        }
-
+        const username = req.user.name; // or use req.user.email
         const { cartItems } = req.body;
 
-        // Check if cartItems is an array and has items
-        if (!Array.isArray(cartItems) || cartItems.length === 0) {
-            return res.status(400).json({ message: 'No items provided for purchase' });
-        }
-
-        // Create a new buy entry for the user
-        const newBuy = new Buy({
+        // Create a new purchase record
+        const newPurchase = new Buy({
             username,
             products: cartItems.map(item => ({
                 productName: item.title,
@@ -400,55 +223,36 @@ app.post('/api/buy', authenticateToken, async (req, res) => {
             }))
         });
 
-        await newBuy.save();
+        await newPurchase.save();
 
-        // Optionally, clear the user's cart after successful purchase
-        await Cart.deleteOne({ username });
-
-        res.status(201).json({ message: 'Purchase recorded successfully' });
-    } catch (error) {
-        console.error('Error recording purchase:', error);
-        res.status(500).json({ message: 'Internal Server Error' });
-    }
-});
-
-
-
-
-// Stripe Checkout Route
-app.post('/stripe-checkout', async (req, res) => {
-    try {
-        const lineItems = req.body.items.map((item) => {
-            const unitAmount = parseInt(item.price.toFixed(2) * 100);
-            return {
+        // Initiate Stripe Checkout
+        const session = await stripeGateway.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: cartItems.map(item => ({
                 price_data: {
                     currency: 'usd',
                     product_data: {
                         name: item.title,
-                        images: [item.imageUrl],
+                        images: [item.productImg],
                     },
-                    unit_amount: unitAmount,
+                    unit_amount: item.price * 100,
                 },
                 quantity: item.quantity,
-            };
-        });
-
-        const session = await stripeGateway.checkout.sessions.create({
-            payment_method_types: ["card"],
-            mode: "payment",
-            success_url: `${req.headers.origin}/payment.html`,
-            cancel_url: `${req.headers.origin}/cancel.html`,
-            line_items: lineItems,
-            billing_address_collection: "required",
+            })),
+            mode: 'payment',
+            success_url: `${process.env.BASE_URL}/payment`,
+            cancel_url: `${process.env.BASE_URL}/cancel`,
         });
 
         res.json({ url: session.url });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ error: "Internal Server Error" });
+    } catch (error) {
+        console.error('Error processing purchase:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 
+// Start the server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running at port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });

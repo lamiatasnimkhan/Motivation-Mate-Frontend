@@ -147,6 +147,7 @@
 </footer>
 <script src="cart1.js"></script>
 <script>
+  const BASE_URL = 'https://kick-kart-tan.vercel.app';
   window.onload = async function () {
   await checkUserLoginStatus(); // This should run first to check if the user is logged in
   fetchUserName(); // This will fetch and display the user name and email
@@ -155,7 +156,7 @@
 
 async function checkUserLoginStatus() {
   try {
-    const response = await fetch('/getUser', {
+    const response = await fetch(`${BASE_URL}/getUser`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -183,7 +184,7 @@ async function checkUserLoginStatus() {
 
 async function fetchUserName() {
   try {
-    const response = await fetch('/getUser');
+    const response = await fetch(`${BASE_URL}/getUser`);
     if (response.ok) {
       const user = await response.json();
       document.getElementById('user-name').textContent = user.name;
@@ -198,7 +199,7 @@ async function fetchUserName() {
 
 async function fetchOrders() {
   try {
-    const response = await fetch('/api/orders', {
+    const response = await fetch(`${BASE_URL}/api/orders`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -257,8 +258,9 @@ function displayOrders(orders) {
       totalPrice += product.price * product.quantity;
     });
   });
+  
   document.getElementById('logout').addEventListener('click', () => {
-  fetch('/logout', {
+  fetch(`${BASE_URL}logout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
