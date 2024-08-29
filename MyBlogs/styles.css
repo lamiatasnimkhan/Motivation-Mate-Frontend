@@ -1,0 +1,584 @@
+/* Basic reset */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Body and general styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #E6E3E0;
+    color: #333;
+    background-size: cover;  /* or contain */
+    background-position: center;  /* or top left */
+    background-repeat: no-repeat;
+    /* background-image: url("imgmyblogs/cup-coffee-wireless-keyboard-notepad.jpg"); */
+    background-image: url("imgmyblogs/5653808.jpg");
+}
+
+
+.navbar-custom {
+  background-color: #7dd3a7;
+  color: #f3fcf7;
+  height: 90px; 
+}
+
+.navbar-toggler {
+  margin-left: auto;
+}
+
+.navbar-brand .logo {
+width: 150px;
+display: flex;
+align-items: center;
+}
+
+li, a, button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.navbar {
+  width: 100%;
+  color: #f3fcf7;
+}
+
+.nav-item {
+  margin-top: -10px;
+  margin-right: 15px;
+  color: #f3fcf7;
+}
+
+.navbar-nav .nav-link {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500; 
+  color:#2E865F; 
+  padding: 0 15px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #fff;
+  background-color: #4CAF50;
+  border-radius: 5px;
+  transform: translateY(-3px);
+}
+
+.loginbut {
+  margin-bottom: 30px;
+}
+
+/* Ensure CSS priority */
+.navbar-custom .navbar-nav .nav-link {
+  color: #333 !important; /* Override any other styles */
+}
+
+.navbar-custom .navbar-nav .nav-link.active {
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #fff !important;
+  background-color: #4CAF50 !important;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 992px) {
+  .navbar-brand .logo {
+      width: 120px;
+  }
+  .navbar-nav .nav-link {
+      font-size: 18px;
+      padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand .logo {
+      width: 100px;
+  }
+  .navbar-nav .nav-link {
+      font-size: 16px;
+      padding: 8px;
+  }
+}
+
+
+
+
+header {
+    background: #449292;
+    /* Teal Green */
+    color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.add-post-btn {
+    background: #9ae459;
+    /* Darker Teal Green */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.add-post-btn:hover {
+    background: #7bb947;
+    /* Even Darker Teal Green */
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#blog-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog-post {
+    background: #cafecbec;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.blog-post h2 {
+    font-size: 1.5rem;
+    color: #090909;
+    /* Teal Green */
+    margin-bottom: 10px;
+}
+
+.blog-description {
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.blog-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #24bf34;
+    /* Teal Green */
+}
+
+.edit-btn:hover {
+    background: #00251a;
+    /* Darker Teal Green */
+}
+
+.delete-btn {
+    background: #d56d6d;
+    /* Red */
+}
+
+.delete-btn:hover {
+    background: #c62828;
+    /* Darker Red */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-post-btn {
+        margin-top: 10px;
+    }
+}
+
+/* CSS to add extra spaces before the bullets in ul items */
+/* Remove default padding and list style */
+/* Remove default padding and list style */
+.blog-description ol {
+    padding-left: 0;
+    /* Remove default padding */
+    list-style: none;
+    /* Remove default list styling */
+    counter-reset: list-item;
+    /* Initialize the list item counter */
+}
+
+.blog-description ol li {
+    position: relative;
+    /* Position relative for pseudo-element */
+    padding-left: 1em;
+    /* Adjust padding to create space for the pseudo-element */
+    margin-bottom: 0.5em;
+    /* Space between list items, adjust as needed */
+}
+
+/* .blog-description ol li::before {
+    content: counter(list-item) '. ';
+    counter-increment: list-item;
+    position: absolute;
+    left: 0;
+} */
+
+#editor-container {
+    height: 300px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+#delete-dialog {
+    position: fixed; /* Stay in place */
+    top: 50%; /* Center the dialog vertically */
+    left: 50%; /* Center the dialog horizontally */
+    transform: translate(-50%, -50%); /* Offset by 50% to truly center it */
+    z-index: 1000; /* Ensure it appears on top of other elements */
+    background-color: #a7a7a7; /* Soft pastel teal background color */
+    padding: 20px; /* Add some padding */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow */
+    width: 320px; /* Slightly wider dialog */
+    text-align: center; /* Center align text */
+}
+
+#delete-dialog h3 {
+    color: #042c25; /* Deep teal color for the warning text */
+    margin-bottom: 20px; /* Space below the warning text */
+    font-family: 'Arial', sans-serif; /* Clean font for the text */
+}
+
+.btn-delete {
+    padding: 10px 20px; /* Add padding to buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    border: none; /* Remove default border */
+    font-size: 14px; /* Font size for the button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 0 10px; /* Space between buttons */
+    background-color: #8e0000; /* Soft coral color for delete button */
+    color: rgb(0, 0, 0); /* White text */
+}
+
+.btn-cancel {
+    padding: 10px 20px; /* Add padding to buttons */
+    border-radius: 5px; /* Rounded corners for buttons */
+    border: none; /* Remove default border */
+    font-size: 14px; /* Font size for the button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 0 10px; /* Space between buttons */
+    background-color: #125a49; /* Soft pastel green-teal for cancel button */
+    color: #000000; /* Deep teal text color */
+}
+
+/* Styling for the text input field */
+#editing-title {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #449292; /* Teal Green border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 15px; /* Space between elements */
+    outline: none;
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+/* Change border color on focus */
+#editing-title:focus {
+    border-color: #336666; /* Darker teal on focus */
+}
+
+/* Styling for the editor container */
+#editor-container {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #449292; /* Teal Green border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 15px; /* Space between elements */
+    min-height: 200px; /* Ensures a minimum height for the editor */
+}
+
+/* Styling for the Submit button */
+#submit {
+    background-color: #449292; /* Teal Green background */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+#submit:hover {
+    background-color: #336666; /* Darker teal on hover */
+}
+
+#cancel {
+  background-color: #f07771; /* Teal Green background */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+#cancel:hover {
+  background-color: #ed7433; /* Darker teal on hover */
+}
+
+#delete-dialog .btn-delete:hover {
+    background-color: #ff1100; /* Darker coral on hover */
+}
+
+#delete-dialog .btn-cancel:hover {
+    background-color: #fff788; /* Slightly darker pastel teal on hover */
+}
+
+
+.disabled {
+    pointer-events: none; /* Prevents all interactions */
+    opacity: 0.5; /* Optional: Makes the section appear disabled */
+}
+
+.hidden{
+    display : none;
+}
+
+
+
+
+/* ////FOOTER */
+
+footer {
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  margin-bottom: 0 auto;
+  height: auto;
+  min-height: 290px;
+  overflow: auto;
+}
+
+@media (max-height:880px) {
+  footer {
+      position: static;
+  }
+  header {
+      padding-top: 40px;
+  }
+}
+
+.footer-distributed {
+  color: #f3fcf7;
+  background-color: #7dd3a7;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px "Poppins", sans-serif;
+  padding: 50px 50px 60px 50px;
+  margin-top: 170px;
+}
+
+.footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+  width: 30%;
+  padding-bottom: 20px;
+}
+
+.footer-distributed h3 {
+  color: #000000;
+  font: normal 36px 'Cookie', cursive;
+  margin: 0;
+}
+
+
+.footer-distributed h3 span {
+  color: #000000;
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+  color: #000000;
+  margin-top: 40px;
+  margin: 20px 0 12px;
+}
+
+.footer-distributed .footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+  color: #000000;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+  width: 35%;
+}
+
+.footer-distributed .footer-center i {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+  font-size: 17px;
+  line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+  display: inline-block;
+  color: #000000;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+  display: block;
+  /* font-weight: normal; */
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+  color: #012b2e;
+  text-decoration: none;
+  ;
+}
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+  width: 30%;
+}
+
+.footer-distributed .footer-company-about {
+  line-height: 20px;
+  color: #000204;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+  display: block;
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+  margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  /* background-color: #ffffff; */
+  border-radius: 2px;
+  font-size: 20px;
+  /* color: #000000; */
+  text-align: center;
+  line-height: 35px;
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+.footer-distributed .footer-icons a:hover {
+  background-color: #ffffff;
+}
+
+.footer-links a:hover {
+  color: #027575;
+}
+
+@media (max-width: 880px) {
+  .footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+      display: block;
+      width: 100%;
+      margin-bottom: 40px;
+      text-align: center;
+  }
+  .footer-distributed .footer-center i {
+      margin-left: 0;
+  }
+}       
+   
