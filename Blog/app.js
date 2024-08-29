@@ -143,7 +143,7 @@ function populateDropdown(dataArray) {
         dropdownItem.addEventListener('click', async () => {
             showUserBlogs(profile.id, profile.username);
         
-            dropdownContainer.style.display = 'none';// Hide dropdown after selecting an item
+            dropdownContainer.classList.add('hidden');;// Hide dropdown after selecting an item
         });
 
         dropdownContainer.appendChild(dropdownItem);
@@ -256,6 +256,7 @@ document.querySelector('.search-bar').addEventListener('submit', async () => {
     
                 singlePost.appendChild(contentDiv);
                 postContainer.appendChild(singlePost);
+                dropdownContainer.classList.add('hidden');
             });
         } catch (error) {
             console.error(error);
