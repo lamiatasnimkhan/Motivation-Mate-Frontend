@@ -127,7 +127,7 @@ function populateDropdown(dataArray) {
     // Add event listener to close the dropdown on click
     closeIcon.addEventListener('click', (event) => {
         event.stopPropagation();
-        dropdownContainer.style.display = 'none'; // Directly manipulate the style
+        dropdownContainer.classList.add('hidden'); // Directly manipulate the style
     });
     
 
@@ -143,7 +143,7 @@ function populateDropdown(dataArray) {
         dropdownItem.addEventListener('click', async () => {
             showUserBlogs(profile.id, profile.username);
         
-            dropdownContainer.classList.add('hidden');;// Hide dropdown after selecting an item
+            dropdownContainer.classList.add('hidden');// Hide dropdown after selecting an item
         });
 
         dropdownContainer.appendChild(dropdownItem);
