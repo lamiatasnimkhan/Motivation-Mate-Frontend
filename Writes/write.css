@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Overpass&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Overpass&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Overpass&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Shippori+Mincho+B1&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body {
+    
+    color: #31572c;
+    
+    margin: 0;
+    padding-left:0;
+    background-image: url("imgwrite/pexels-jessbaileydesign-965117.jpg");
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    flex-direction: column;
+    margin-bottom: 0px;
+    background-size: cover;  /* or contain */
+    background-position: center;  /* or top left */
+    background-repeat: no-repeat;
+    
+}
+  
+.navbar-custom {
+  background-color: #7dd3a7;
+  color: #f3fcf7;
+  height: 90px; 
+}
+
+.navbar-toggler {
+  margin-left: auto;
+}
+
+.navbar-brand .logo {
+width: 150px;
+display: flex;
+align-items: center;
+}
+
+li, a, button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  list-style: none;
+}
+
+.navbar {
+  width: 100%;
+  color: #f3fcf7;
+}
+
+.nav-item {
+  margin-top: -10px;
+  margin-right: 15px;
+  color: #f3fcf7;
+}
+
+.navbar-nav .nav-link {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500; 
+  color:#2E865F; 
+  padding: 0 15px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  font-weight: bold;
+  color: #000;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #fff;
+  background-color: #4CAF50;
+  border-radius: 5px;
+  transform: translateY(-3px);
+}
+
+.loginbut {
+  margin-bottom: 30px;
+}
+
+/* Ensure CSS priority */
+.navbar-custom .navbar-nav .nav-link {
+  color: #333 !important; /* Override any other styles */
+}
+
+.navbar-custom .navbar-nav .nav-link.active {
+  color: #000 !important;
+  font-weight: bold;
+}
+
+.navbar-custom .navbar-nav .nav-link:hover {
+  color: #fff !important;
+  background-color: #4CAF50 !important;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 992px) {
+  .navbar-brand .logo {
+      width: 120px;
+  }
+  .navbar-nav .nav-link {
+      font-size: 18px;
+      padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand .logo {
+      width: 100px;
+  }
+  .navbar-nav .nav-link {
+      font-size: 16px;
+      padding: 8px;
+  }
+}
+
+
+
+.add {
+  margin-left: 200px;
+  margin-top: 50px;
+  padding-left: 90px;
+  padding-right: 90px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  /* background-color: #e6e3e0; */
+}
+
+.add .content {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add .content input {
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+.add .content .editorContainer {
+  height: 300px;
+  overflow: scroll;
+  border: 1px solid lightgray;
+}
+
+.add .content .editor {
+  height: 100%;
+  border: none;
+  background-color: white;
+  width: 100%;
+  padding: 10px;
+  resize: none; /* Prevents resizing of the textarea */
+}
+
+.add .menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add .menu .item {
+  background-color: #fff;
+  border: 1px solid lightgray;
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #555;
+}
+
+.add .menu .item h1 {
+  font-size: 20px;
+}
+
+.add .menu .item .file {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.add .menu .item .button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add .menu .item .buttons {
+  cursor: pointer;
+  color: #2f3e46;
+  background-color: white;
+  border: 1px solid #2f3e46;
+  padding: 3px 5px;
+}
+
+.add .menu .item .buttons1 {
+  cursor: pointer;
+  color: white;
+  background-color: #2f3e46;
+  border: 1px solid #2f3e46;
+  padding: 3px 5px;
+}
+
+.add .menu .item .cat {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #2f3e46;
+}
+#editorContainer {
+  height: 300px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+
+
+/* Styling for the Title input field */
+#title-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #449292; 
+  border-radius: 8px; 
+  font-size: 16px;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px; 
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Change border color on focus */
+#title-input:focus {
+  border-color: #336666; /* Darker teal on focus */
+}
+
+/* Styling for the editor container */
+#editorContainer {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #449292; /* Teal Green border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-bottom: 15px; /* Space between elements */
+  min-height: 200px; /* Ensures a minimum height for the editor */
+}
+
+/* Styling for the POST button */
+.buttons1 {
+  background-color: #449292; /* Teal Green background */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.buttons1:hover {
+  background-color: #336666; /* Darker teal on hover */
+}
+
+/* Additional styling for the content container */
+.add .content {
+  padding: 20px;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow */
+}
+
+.back-button-container {
+  position: absolute;
+  margin-top: 80px;
+  top: 50px; /* adjust the top position to your liking */
+  left: 0px; /* adjust the left position to your liking */
+}
+
+.back-button {
+  background-color: #449292; /* Teal Green background */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 8px; /* Rounded corners */
+}
+
+.back-button:hover {
+  background-color: #f0f0f0;
+}
+
+/* ////FOOTER */
+
+footer {
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  margin-bottom: 0 auto;
+  height: auto;
+  min-height: 290px;
+  width: 100%;
+  overflow: auto;
+}
+
+@media (max-height:880px) {
+  footer {
+      position: static;
+  }
+  header {
+      padding-top: 40px;
+  }
+}
+
+.footer-distributed {
+  color: #f3fcf7;
+  background-color: #7dd3a7;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: bold 16px "Poppins", sans-serif;
+  padding: 50px 0px 60px 50px;
+  margin-top: 70px;
+}
+
+.footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Footer left */
+
+.footer-distributed .footer-left {
+  width: 30%;
+  padding-bottom: 20px;
+}
+
+.footer-distributed h3 {
+  color: #000000;
+  font: normal 36px 'Cookie', cursive;
+  margin: 0;
+}
+
+
+.footer-distributed h3 span {
+  color: #000000;
+}
+
+/* Footer links */
+
+.footer-distributed .footer-links {
+  color: #000000;
+  margin-top: 40px;
+  margin: 20px 0 12px;
+}
+
+.footer-distributed .footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-distributed .footer-company-name {
+  color: #000000;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* Footer Center */
+
+.footer-distributed .footer-center {
+  width: 35%;
+}
+
+.footer-distributed .footer-center i {
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 25px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 42px;
+  margin: 10px 15px;
+  vertical-align: middle;
+}
+
+.footer-distributed .footer-center i.fa-envelope {
+  font-size: 17px;
+  line-height: 38px;
+}
+
+.footer-distributed .footer-center p {
+  display: inline-block;
+  color: #000000;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.footer-distributed .footer-center p span {
+  display: block;
+  /* font-weight: normal; */
+  font-size: 14px;
+  line-height: 2;
+}
+
+.footer-distributed .footer-center p a {
+  color: #012b2e;
+  text-decoration: none;
+  ;
+}
+
+/* Footer Right */
+
+.footer-distributed .footer-right {
+  width: 30%;
+}
+
+.footer-distributed .footer-company-about {
+  line-height: 20px;
+  color: #000204;
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.footer-distributed .footer-company-about span {
+  display: block;
+  color: #000000;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer-distributed .footer-icons {
+  margin-top: 25px;
+}
+
+.footer-distributed .footer-icons a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  /* background-color: #ffffff; */
+  border-radius: 2px;
+  font-size: 20px;
+  /* color: #000000; */
+  text-align: center;
+  line-height: 35px;
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+
+.footer-distributed .footer-icons a:hover {
+  background-color: #ffffff;
+}
+
+.footer-links a:hover {
+  color: #027575;
+}
+
+@media (max-width: 880px) {
+  .footer-distributed .footer-left, .footer-distributed .footer-center, .footer-distributed .footer-right {
+      display: block;
+      width: 100%;
+      margin-bottom: 40px;
+      text-align: center;
+  }
+  .footer-distributed .footer-center i {
+      margin-left: 0;
+  }
+}       
+   
