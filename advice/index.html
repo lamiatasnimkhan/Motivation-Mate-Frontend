@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- BOOTSTRAP -->
+    <!-- OPENSANS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Overpass&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+     rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+        <div class="container-fluid">
+          <a href="#">
+            <img class="logo" src="images/logo.png" alt="MotivationMate" >
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="../homepage/homepage.html">Home</a>
+              </li> -->
+              <li class="nav-item">
+                <a class="nav-link" href="../Dos&Dones/dos&dones.html">DOs and DONEs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../Blog/blogs.html">Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../MyBlogs/index.html">My Blogs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../TIMER/index.html">Pomodoro Timer</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../advice/index.html">Uplift Yourself</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Pomodoro Timer </h1>
+        <div class="panel">
+            <div id="work">Work</div>
+            <div id="break">Break</div>
+        </div>
+        <div class="timer">
+            <div class="circle">
+                <div class="time">
+                    <p id="minutes"></p>
+                    <p>:</p>
+                    <p id="seconds"></p>
+                </div>
+            </div>
+        </div>
+        <div class="controls">
+            <button id="start">Start</button>
+
+            <!-- <button id="reset" style="display: none;" onclick="reset()">Pause to Reset</button> -->
+        </div>
+    </div>
+    <div class="pomodoro-card">
+        <p>The Pomodoro Technique turns time into a game! Work in focused 25-minute bursts called "Pomodoros," then reward yourself with a 5-minute break. After four Pomodoros, take a longer break to recharge. It's all about working smarter, not harder, and keeping your productivity on point while still making time to relax!</p>
+    </div>
+    <footer class="footer-distributed" id="about">
+
+        <div class="footer-left">
+          <a href="#">
+            <img class="logo" src="images/logo.png" alt="MotivationMate" style=" width: 100px; margin-top: -200px; margin-left: -20px; margin-bottom: -160px;"></img>
+          </a>
+            <p class="footer-links" style="margin-top:-10px;">
+                <a href="../homepage/homepage.html">Home</a>
+                |
+                <a href="../Dos&Dones/dos&dones.html">DOs and DONEs</a>
+                |
+                <a href="../Blog/blogs.html">Blogs</a>
+                |
+                <a href="../MyBlogs/index.html">My Blogs</a>
+                |
+                <a href="../TIMER/index.html">Pomodoro Timer</a>
+                |
+                <a href="../advice/index.html">Uplift Yourself</a>
+            </p>
+    
+            <p class="footer-company-name">Copyright © 2024 <strong>MotivationMate</strong> All rights reserved</p>
+        </div>
+    
+        <div class="footer-center">
+            <div>
+                <i class="fa-solid fa-location-dot" style="color: #449292;"></i>
+                <p><span>CUET</span>
+                    Chattogram</p>
+            </div>
+    
+            <div>
+                <i class="fa-solid fa-phone" style="color: #449292;"></i>
+                <p>+88 74**9**258</p>
+            </div>
+            <div>
+                <i class="fa-solid fa-envelope" style="color: #449292;"></i>
+                <p><a href="arpitamallik13@gmail.com">MotivationMate@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                <strong>MotivationMate</strong> your ultimate companion for achieving your goals and maintaining a positive mindset. MotivationMate empowers you to set daily goals and track your progress effortlessly, providing a structured platform to outline your objectives and monitor your achievements. Additionally, the app includes productive tools like to-do lists, helping you organize tasks and prioritize effectively.
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa-brands fa-facebook" style="color: #204b4b;"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram" style="color: #204b4b;"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin" style="color: #204b4b;"></i></i></a>
+    
+            </div>
+        </div>
+    </footer>
+    <script src="app.js"></script>
+    
+</body>
+</html>
