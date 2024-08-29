@@ -27,7 +27,7 @@ logout.addEventListener('click', ()=>{
     cancelbutton.classList.add('btn-cancel');
     okbutton.addEventListener('click', ()=>{
         localStorage.clear();
-        window.location.href='../homepage.html'
+        window.location.href='../index.html'
     });
     cancelbutton.addEventListener('click', ()=>{
         deleteDialog.classList.add("hidden");
