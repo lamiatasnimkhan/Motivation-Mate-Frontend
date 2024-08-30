@@ -150,6 +150,10 @@ li, a, button {
 }
 #dropdown-container {
   position: relative; /* Ensure that the close icon is positioned relative to the dropdown */
+  margin-left: 480px;
+  margin-right: 480px;
+  background-color: #cdcbcb;
+  margin-bottom: 10px;
 }
 .hidden {
   display: none;
